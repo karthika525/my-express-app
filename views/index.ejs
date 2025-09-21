@@ -2,12 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= hobbyTitle %></title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title><%= storeName %></title>
+  <style>
+    body{
+      
+    }
+    b{
+      color: maroon;
+      font-size: large;
+    }
+  </style>
 </head>
 <body>
-  <h1><%= hobbyTitle %></h1>
-  <p><%= hobbyDescription %></p>
-  <img src="/images/Writing.jpeg" alt="Image of a written note">
+  <h1><%= storeName %></h1>
+  <h2 style="color: green;">List of available books...</h2>
+  <ul>
+    <% books.forEach(book => { %>
+      <li><b><%= book.title %></b> by <b><%= book.author %></b>
+      </li>
+    <% }) %>
+  </ul>
+  <script>
+    console.log("Welcome to My Book Store!");
+  </script>
 </body>
 </html>
+

@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const hobbyTitle = "Writing";
-const hobbyDescription = "Writing is a creative hobby that allows individuals to express thoughts, emotions, and stories through words. It enhances imagination, sharpens communication skills, and provides a powerful outlet for self-expression.";
-router.get('/', (req, res) => {
-  res.render('index', { hobbyTitle, hobbyDescription });
+const storeName = "My Book Store";
+const books = [
+  { title: "Gitanjali", author: "Rabindranath Tagore" },
+  { title: "Naalukettu", author: "M T Vasudevan Nair" },
+  { title: "Khasakkinte Ithihasam", author: "O V Vijayan" }
+];
+router.get('/', function(req, res) {
+  res.render('index', { storeName, books });
 });
-
 module.exports = router;
+
+
