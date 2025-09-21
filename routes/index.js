@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const storeName = "My Book Store";
-const books = [
-  { title: "Gitanjali", author: "Rabindranath Tagore" },
-  { title: "Naalukettu", author: "M T Vasudevan Nair" },
-  { title: "Khasakkinte Ithihasam", author: "O V Vijayan" }
+const travelPlaces = [
+    { name: 'Banff', country: 'Canada', isPopular: true },
+    { name: 'Agra', country: 'India', isPopular: true },
+    { name: 'Luang Prabang', country: 'Laos', isPopular: false }
 ];
 router.get('/', function(req, res) {
-  res.render('index', { storeName, books });
+  const welcomeMessage = "Explore Unique Places Around the World!";
+  res.render('index', { travel_places: travelPlaces, msg: welcomeMessage });
 });
 module.exports = router;
 

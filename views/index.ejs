@@ -2,29 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= storeName %></title>
+  <title>Travel_Website</title>
   <style>
-    body{
-      
+    h1{
+      color: brown;
     }
     b{
-      color: maroon;
+      color: rgb(8, 98, 171);
       font-size: large;
     }
   </style>
 </head>
 <body>
-  <h1><%= storeName %></h1>
-  <h2 style="color: green;">List of available books...</h2>
+<h1><%= msg %></h1>
   <ul>
-    <% books.forEach(book => { %>
-      <li><b><%= book.title %></b> by <b><%= book.author %></b>
+     <% for(let i = 0; i < travel_places.length; i++) { %>
+      <li>
+      <b><%= travel_places[i].name %></b>, <%= travel_places[i].country %>
+      <% if(travel_places[i].isPopular) { %>
+      ? Popular Destination!
+      <% } %>
       </li>
-    <% }) %>
-  </ul>
-  <script>
-    console.log("Welcome to My Book Store!");
-  </script>
+      <% } %>
+    </ul>
+    <script>
+        alert("Welcome,Let's explore the World with us!");
+    </script>
 </body>
 </html>
 
