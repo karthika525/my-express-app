@@ -17,7 +17,9 @@ h1 {
   font-size: 20px;
   margin-bottom: 15px;
 }
-
+b{
+    color: lawngreen;
+}
 label {
   display: block;
   margin: 10px 0 5px;
