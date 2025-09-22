@@ -25,12 +25,12 @@ const validatePrice = (req, res, next) => {
   next();
 };
 
-const validateDescription = (req, res, next) => {
-  const description = req.body.description?.trim();
+const validateQuantity = (req, res, next) => {
+  const quantity = parseInt(req.body.quantity, 10);
   const errors = [];
 
-  if (!description) {
-    errors.push({ msg: 'Description is required' });
+  if (isNaN(quantity) || quantity < 0) {
+    errors.push({ msg: 'Quantity must be a non-negative integer' });
   }
 
   req.validationErrors = req.validationErrors || [];
@@ -38,5 +38,22 @@ const validateDescription = (req, res, next) => {
   next();
 };
 
-module.exports = {validateProductName,validatePrice,validateDescription
+const validateDescription = (req, res, next) => {
+  const description = req.body.description?.trim();
+  const errors = [];
+
+  if (!description) {
+    errors.push({ msg: 'Add a description' });
+  }
+
+  req.validationErrors = req.validationErrors || [];
+  req.validationErrors.push(...errors);
+  next();
 };
+module.exports = {
+  validateProductName,
+  validatePrice,
+  validateQuantity, 
+  validateDescription
+};
+
