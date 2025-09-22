@@ -10,8 +10,6 @@ const validateProductName = (req, res, next) => {
   req.validationErrors.push(...errors);
   next();
 };
-
-
 const validatePrice = (req, res, next) => {
   const price = parseFloat(req.body.price);
   const errors = [];

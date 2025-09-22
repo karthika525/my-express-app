@@ -2,42 +2,37 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/productModel');
 
-router.get('/', (req, res) => {
+router.get('/add', (req, res) => {
   res.render('product-form');
 });
 
 
-router.post('/addProduct', async (req, res) => {
-  const { name, quantity, price } = req.body;
-
+router.post('/add', async (req, res) => {
   try {
+    const { name, quantity, price } = req.body;
     const newProduct = new Product({
-      name,quantity: parseInt(quantity),price: parseFloat(price)
+      name: name.trim(),
+      quantity: parseInt(quantity),
+      price: parseFloat(price)
     });
 
     await newProduct.save();
-    res.redirect('/products');
+    res.redirect('/products/list');
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error while saving product.");
+    res.status(500).send('Error saving product: ' + err.message);
   }
 });
-
-router.get('/products', async (req, res) => {
+router.get('/list', async (req, res) => {
   try {
-    const products = await Product.find().lean();
-    const totalCount = await Product.countDocuments();
+    const products = await Product.find({})
+      .sort({ price: 1 })
+      .limit(5)
+      .select('name price');
 
-    res.render('pdt-list', {
-      products,
-      totalCount
-    });
+    res.render('pdt-list', { products });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error while listing products.");
+    res.status(500).send('Error fetching products');
   }
 });
 
 module.exports = router;
-
-
