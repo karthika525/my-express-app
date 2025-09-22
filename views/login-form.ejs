@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Movie Club</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+    <div class="login-box">
+       <h1>Login</h1>
+        <form action="/createUser" method="post">
+            <label>Email</label><br>
+            <input type="text" name="email" value="<%= oldData.email || '' %>"><br>
+
+            <label>Password</label><br>
+            <input type="password" name="password"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <!-- for showing the validations -->
+        <% if (errors && errors.length > 0) { %>
+            <ul style="color: red;">
+                <% errors.forEach(function(error) { %>
+                    <li><%= error.msg %></li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+
+</body>
+</html>
