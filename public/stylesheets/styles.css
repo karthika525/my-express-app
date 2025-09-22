@@ -17,6 +17,9 @@ h1 {
   font-size: 20px;
   margin-bottom: 15px;
 }
+i{
+    color: rgb(64, 79, 210);
+}
 b{
     color: lawngreen;
 }
