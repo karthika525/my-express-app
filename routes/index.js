@@ -1,21 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const { validateEmail, validatePassword } = require('./customValidators');
-
-// Render the form
+const { check, validationResult } = require('express-validator');
 router.get('/', (req, res) => {
-  res.render('login-form', { errors: [], oldData: {} });
+  res.render('reg-form', {
+    errors: [],oldData: {}
+  });
 });
+router.post('/createUser', [
+  check('name').notEmpty().withMessage('Name is required'),
+  check('email').isEmail().withMessage('Invalid email address'),
+  check('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
+], (req, res) => {
+  const errors = validationResult(req);
 
-// Handle form submission
-router.post('/createUser', validateEmail, validatePassword, (req, res) => {
-  const errors = req.validationErrors || [];
-
-  if (errors.length > 0) {
-    res.render('login-form', { errors: errors, oldData: req.body });
-  } else {
-    res.render('form-data', { email: req.body.email });
+  if (!errors.isEmpty()) {
+    return res.render('reg-form', {
+      errors: errors.array(),
+      oldData: req.body
+    });
   }
+
+  // if no validation errors
+  const { name, email } = req.body;
+  res.render('form-data', { name, email });
 });
 
 module.exports = router;
