@@ -1,20 +1,29 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-// Home Page
-router.get('/', function(req, res) {
+let lastBook = { title: '', pages: '' };
+router.get('/', (req, res) => {
   res.render('home', { title: 'Home' });
 });
-
-// Destinations Page
-router.get('/destinations', function(req, res) {
-  res.render('destinations', { title: 'Destinations' });
+router.get('/add-book', (req, res) => {
+  res.render('add-book', { title: 'Add Book' });
 });
-
-// Contact Page
-router.get('/contact', function(req, res) {
-  res.render('contact', { title: 'Contact' });
+router.post('/submit-book', (req, res) => {
+  const { title, pages } = req.body;
+  lastBook.title = title;
+  lastBook.pages = pages;
+  res.redirect('/thank-you');
+});
+router.get('/thank-you', (req, res) => {
+  res.render('thank-you', { title: 'Thank You' });
+});
+router.get('/show-title', (req, res) => {
+  res.render('show-title', { title: 'Book Title', bookTitle: lastBook.title });
+});
+router.get('/show-pages', (req, res) => {
+  res.render('show-pages', { title: 'Book Pages', bookPages: lastBook.pages });
 });
 
 module.exports = router;
+
 
